@@ -2,14 +2,14 @@
   <% @auction_items.each do |auction_item| %>
     <div class="max-w-sm rounded overflow-hidden shadow-lg m-4 bg-light-blue">
       <img class="w-full p-2 h-48 object-contain" src=<%= auction_item.image_link %> alt="Mountain">
-      <div class="px-6 py-4">
+      <div class="px-6 py-4 h-32 max-h-48 overflow-y-scroll">
         <div class="font-bold text-xl mb-2 "> <%= auction_item.name %> </div>
         <p class="text-gray-700 text-base">
           <%= auction_item.description %>
         </p>
       </div>
       <div class="px-6 pt-4 pb-2 flex justify-between">
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"> <%= auction_item.end_date %> </span>
+        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"> <%= Time.(auction_item.end_date) %> </span>
         <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"> <%= auction_item.starting_price %> </span>
 
       </div>
