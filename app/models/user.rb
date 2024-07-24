@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    has_many :bids, dependent: :destroy
 
     validates :email, presence: true
     validates :name, presence: true

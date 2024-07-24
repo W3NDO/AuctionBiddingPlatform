@@ -1,4 +1,5 @@
 class AuctionItem < ApplicationRecord
+  has_many :bids, dependent: :destroy
 
   validates :name, presence: true
   validates :description, presence: true
