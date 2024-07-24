@@ -20,7 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_24_115948) do
     t.decimal "starting_price"
     t.datetime "end_date"
     t.decimal "current_bid"
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_link"
@@ -31,8 +31,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_24_115948) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "auctioneer", default: 1
-    t.integer "bidder", default: 0
+    t.boolean "auctioneer", default: false
+    t.boolean "bidder", default: true
   end
 
 end
