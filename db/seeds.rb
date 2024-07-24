@@ -1,3 +1,113 @@
+require 'faker'
+
 # Auction Item seed. 
 # descriptions were generated with chat GPT using the following prompt 'Write a 50 word description for ITEM_NAME to be sold at an auction.'
+
+auction_items = [
+    {
+      "name": "Antique Vase",
+      "description": "A rare porcelain vase from the Ming Dynasty, beautifully crafted with intricate designs.",
+      "starting_price": 200.00,
+      "end_date": "29-10-2024",
+      "image_link": "https://picsum.photos/id/1/200/300"
+    },
+    {
+      "name": "Vintage Pocket Watch",
+      "description": "An elegant gold pocket watch from the early 1900s, in perfect working condition.",
+      "starting_price": 700.00,
+      "end_date": "29-10-2024",
+      "image_link": "https://picsum.photos/id/1/200/300"
+    },
+    {
+      "name": "Original Picasso Painting",
+      "description": "An original oil painting by Pablo Picasso, featuring his unique cubist style.",
+      "starting_price": 500.00,
+      "end_date": "29-10-2024",
+      "image_link": "https://picsum.photos/id/1/200/300"
+    },
+    {
+      "name": "Classic Car",
+      "description": "A fully restored 1965 Ford Mustang, a timeless classic in mint condition.",
+      "starting_price": 24000.00,
+      "end_date": "29-10-2024",
+      "image_link": "https://picsum.photos/id/1/200/300"
+    },
+    {
+      "name": "Diamond Necklace",
+      "description": "A stunning diamond necklace with a total of 5 carats of flawless diamonds.",
+      "starting_price": 50000.00,
+      "end_date": "29-10-2024",
+      "image_link": "https://picsum.photos/id/1/200/300"
+    },
+    {
+      "name": "Signed First Edition Book",
+      "description": "A first edition of 'To Kill a Mockingbird' signed by Harper Lee, in excellent condition.",
+      "starting_price": 1200.00,
+      "end_date": "29-10-2024",
+      "image_link": "https://picsum.photos/id/1/200/300"
+    },
+    {
+      "name": "Handcrafted Wooden Furniture Set",
+      "description": "A unique set of handcrafted wooden furniture, including a dining table and chairs, made from reclaimed oak.",
+      "starting_price": 2000.00,
+      "end_date": "29-10-2024",
+      "image_link": "https://picsum.photos/id/1/200/300"
+    },
+    {
+      "name": "Luxury Watch",
+      "description": "A Rolex Submariner watch, featuring a stainless steel case and a black dial.",
+      "starting_price": 2200.00,
+      "end_date": "29-10-2024",
+      "image_link": "https://picsum.photos/id/1/200/300"
+    },
+    {
+      "name": "Vintage Guitar",
+      "description": "A 1959 Gibson Les Paul Standard guitar, a prized possession for any collector or musician.",
+      "starting_price": 1200.00,
+      "end_date": "29-10-2024",
+      "image_link": "https://picsum.photos/id/1/200/300"
+    },
+    {
+      "name": "Rare Coin Collection",
+      "description": "A collection of rare and valuable coins from various historical periods and regions.",
+      "starting_price": 900.00,
+      "end_date": "29-10-2024",
+      "image_link": "https://picsum.photos/id/1/200/300"
+    }
+  ]
+  
+
+
+def create_user
+    User.create!(
+        name:  Faker::Name.name,
+        email:  Faker::Internet.email,
+    )
+end
+
+def create_bid(items, users)
+    item = items.sample
+    user = users.sample
+    bid = Bid.create(
+        user_id: user.id, 
+        auction_item_id: item.id, 
+        amount: rand(item.starting_price..(item.starting_price*2)),
+        bid_time: Time.now
+    )
+end
+
+# create the auction items
+
+auction_items.each do |item|
+    AuctionItem.create!(item)
+end
+
+users = []
+# create 5 users
+5.times { create_user }
+
+# create 5 bids
+5.times { create_bid(AuctionItem.all, User.all) }
+
+
 
