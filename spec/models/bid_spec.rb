@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Bid, type: :model do
   context "creating a new bid" do
     it "ensures bids are associated with a user" do
-      user = User.create(name: "Jane Doe", email: "email@example.com")
-      item = AuctionItem.create(name:"XBOX original console", description: "mint condition console", starting_price: 500.00, end_date: "25-07-2024", image_link: "https://link.com" )
+      user = User.create(name: "Jane Doe", email: "email@example.com", password: "foobar123", password_confirmation: "foobar123")
+      item = AuctionItem.create(name:"XBOX original console", description: "mint condition console", starting_price: 500.00, end_date: "25-07-2024", image_link: "https://link.com", user_id: user.id )
       bid = Bid.create(user_id: user.id, auction_item_id: item.id, amount: 700.00, bid_time: "29-07-2024")
       bad_bid = Bid.create(auction_item_id: item.id, amount: 700.00, bid_time: "29-07-2024" )
 
@@ -15,8 +15,8 @@ RSpec.describe Bid, type: :model do
     end
 
     it "ensures bids are associated with an auction item" do
-      user = User.create(name: "Jane Doe", email: "email@example.com")
-      item = AuctionItem.create(name:"XBOX original console", description: "mint condition console", starting_price: 500.00, end_date: "25-07-2024", image_link: "https://link.com" )
+      user = User.create(name: "Jane Doe", email: "email@example.com", password: "foobar123", password_confirmation: "foobar123")
+      item = AuctionItem.create(name:"XBOX original console", description: "mint condition console", starting_price: 500.00, end_date: "25-07-2024", image_link: "https://link.com", user_id: user.id )
       bid = Bid.create(user_id: user.id, auction_item_id: item.id, amount: 700.00, bid_time: "29-07-2024")
       bad_bid = Bid.create(user_id: user.id, amount: 700.00, bid_time: "29-07-2024" )
 
@@ -26,8 +26,8 @@ RSpec.describe Bid, type: :model do
     end
   
     it "ensures bid amount is present" do
-      user = User.create(name: "Jane Doe", email: "email@example.com")
-      item = AuctionItem.create(name:"XBOX original console", description: "mint condition console", starting_price: 500.00, end_date: "25-07-2024", image_link: "https://link.com" )
+      user = User.create(name: "Jane Doe", email: "email@example.com", password: "foobar123", password_confirmation: "foobar123")
+      item = AuctionItem.create(name:"XBOX original console", description: "mint condition console", starting_price: 500.00, end_date: "25-07-2024", image_link: "https://link.com", user_id: user.id )
       bad_bid = Bid.create(user_id: user.id, auction_item_id: item.id, bid_time: "29-07-2024" )
 
       expect(bad_bid.valid?).to be false
@@ -36,8 +36,8 @@ RSpec.describe Bid, type: :model do
     end
   
     it "ensures bid time is present" do
-      user = User.create(name: "Jane Doe", email: "email@example.com")
-      item = AuctionItem.create(name:"XBOX original console", description: "mint condition console", starting_price: 500.00, end_date: "25-07-2024", image_link: "https://link.com" )
+      user = User.create(name: "Jane Doe", email: "email@example.com", password: "foobar123", password_confirmation: "foobar123")
+      item = AuctionItem.create(name:"XBOX original console", description: "mint condition console", starting_price: 500.00, end_date: "25-07-2024", image_link: "https://link.com", user_id: user.id )
       bad_bid = Bid.create(user_id: user.id, auction_item_id: item.id, amount: 700.00 )
 
       expect(bad_bid.valid?).to be false
