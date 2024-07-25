@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'auction_item/new'
   get 'auction_item/index'
   get 'bid/new'
