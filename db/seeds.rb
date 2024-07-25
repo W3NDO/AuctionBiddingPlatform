@@ -80,8 +80,10 @@ auction_items = [
 
 def create_user
     User.create!(
-        name:  Faker::Name.name,
+        name:  Faker::Internet.username(specifier: 5..8),
         email:  Faker::Internet.email,
+        password:  "foobar123",
+        password_confirmation:  "foobar123",
     )
 end
 
@@ -98,13 +100,13 @@ end
 
 # create the auction items
 
+5.times { create_user }
 auction_items.each do |item|
-    AuctionItem.create!(item)
+    AuctionItem.create!(**item, user_id: User.ids&.sample)
 end
 
 users = []
 # create 5 users
-5.times { create_user }
 
 # create 5 bids
 5.times { create_bid(AuctionItem.all, User.all) }
