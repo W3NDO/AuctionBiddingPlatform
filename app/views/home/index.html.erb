@@ -1,6 +1,6 @@
 <div class ="mx-auto max-w-7xl px-2 sm:px-6 lg:px-4 flex flex-wrap">
   <% @auction_items.each do |auction_item| %>
-    <% highest_bid = auction_item&.bids&.map{ |bid| bid.amount }&.max %>
+    <% highest_bid = auction_item.get_highest_bid %>
     <div class="max-w-sm rounded overflow-hidden shadow-lg m-4 bg-light-blue">
       <img class="w-full p-2 h-48 object-contain" src=<%= auction_item.image_link %> alt="Mountain">
       <div class="px-6 py-4 ">
@@ -13,39 +13,23 @@
         </p>
       </div>
       <div class="px-6 pt-4 pb-2 flex justify-between">
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"> <%= auction_item.end_date.strftime("%d-%m-%Y") %> </span>
-        <% if highest_bid %>
-          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"> €<%= highest_bid %> <span class="text-muted-blue"> Current Highest Bid:  </span>  </span>
-        <% else %>
-          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-muted-blue mr-2 mb-2"> No Bids Yet. Be the first to place a bid </span>
-        <% end %>
+        <div>
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"> <%= auction_item.end_date.strftime("%d-%m-%Y") %> </span>
+        </div>
+
+        <div id="highest-bid">
+          <%= turbo_frame_tag "highest_bid_auction_item_#{auction_item.id}" do %>
+            <%= render partial: "bid/highest_bid", locals: { auction_item: auction_item } %>
+          <% end %>
+        </div>
       </div>
 
       <div>
 
       </div>
       <div class="p-1 m-1">
-          <%= form_for :bid do |f| %>
-            <div class="flex justify-around p-2 m-1">
-            <div>
-              <%= f.hidden_field(:auction_item_id, :auction_item_id => auction_item.id) %>
-              <%= f.hidden_field(:user_id, :user_id => auction_item.id) %>
-              <%= f.hidden_field(:bid_time, :bid_time => Time.now) %>
-              <%= f.number_field(:amount, 
-                :class => "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
-                :required => true, 
-                :placeholder => highest_bid ? highest_bid.to_s : auction_item.starting_price.to_s, 
-                :min => highest_bid ? highest_bid.to_s : auction_item.starting_price.to_s
-              ) %>
-              </div>
-
-              <div>
-                <button class="rounded-lg p-2 bg-dark-blue text-white active:ring-accent-blue" type="button"> 
-                  Place Bid 
-                </button>
-              </div>
-            </div>
-          <% end %>
+          <%= render partial: "bid/new", locals: {auction_item: auction_item, user_id: current_user.id, highest_bid: highest_bid} %>
+          
       </div>
 
     </div>

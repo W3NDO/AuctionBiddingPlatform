@@ -1,0 +1,6 @@
+<% highest_bid = auction_item.get_highest_bid %>
+
+<div class="flex flex-col"> 
+    <span class="text-xs text-muted-blue"> <%= highest_bid ? "Current Highest Bid" : "No bids yet" %> </span>
+    <span class="text-lg text-dark-blue font-bold"> €<%= highest_bid ? highest_bid : "--" %> </span>
+</div>
