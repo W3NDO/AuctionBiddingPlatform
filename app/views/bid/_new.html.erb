@@ -1,0 +1,20 @@
+<%= form_with model: Bid.new, url: bid_create_path do |f| %>
+  <div class="flex justify-around p-2 m-1">
+  <div>
+    <%= f.hidden_field(:auction_item_id, :value => auction_item.id) %>
+    <%= f.hidden_field(:user_id, :value => user_id) %>
+    <%= f.number_field(:amount, 
+      :class => "bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", 
+      :required => true, 
+      :placeholder => highest_bid ? highest_bid.to_s : auction_item.starting_price.to_s, 
+      :min => highest_bid ? highest_bid.to_s : auction_item.starting_price.to_s
+    ) %>
+    </div>
+
+    <div>
+      <button class="rounded-lg p-2 bg-dark-blue text-white active:ring-accent-blue" type="submit"> 
+        Place Bid 
+      </button>
+    </div>
+  </div>
+<% end %>

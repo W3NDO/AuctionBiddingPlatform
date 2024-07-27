@@ -2,7 +2,8 @@ class Bid < ApplicationRecord
     belongs_to :user
     belongs_to :auction_item
 
-    validates :amount, presence: true
-    validates :amount, numericality: { greater_than_or_equal_to: 0 }
+    monetize :amount_cents, with_model_currency: :currency, numericality: { greater_than_or_equal_to: 1 }
+
+    validates :amount_cents, presence: true
     validates :bid_time, presence: true
 end
