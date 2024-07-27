@@ -1,8 +1,10 @@
 <div class ="mx-auto max-w-7xl px-2 sm:px-6 lg:px-4 flex flex-wrap">
   <% @auction_items.each do |auction_item| %>
     <% highest_bid = auction_item.get_highest_bid %>
-    <div class="max-w-sm rounded overflow-hidden shadow-lg m-4 bg-light-blue">
+    <div class="max-w-sm rounded overflow-hidden shadow-lg m-4 bg-light-blue auction-item" id="auction-item-<%= auction_item.id %>" data-auction-item-id="<%= auction_item.id %>" >
+
       <img class="w-full p-2 h-48 object-contain" src=<%= auction_item.image_link %> alt="Mountain">
+
       <div class="px-6 py-4 ">
         <div class="flex flex-col justify-around" >
           <div class="font-bold text-xl mb-2 "> <%= auction_item.name %> </div>
@@ -12,12 +14,13 @@
           <%= auction_item.description %>
         </p>
       </div>
+
       <div class="px-6 pt-4 pb-2 flex justify-between">
         <div>
           <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"> <%= auction_item.end_date.strftime("%d-%m-%Y") %> </span>
         </div>
 
-        <div id="highest-bid">
+        <div >
           <%= turbo_frame_tag "highest_bid_auction_item_#{auction_item.id}" do %>
             <%= render partial: "bid/highest_bid", locals: { auction_item: auction_item } %>
           <% end %>

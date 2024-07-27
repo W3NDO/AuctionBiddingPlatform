@@ -3,10 +3,19 @@ class BidController < ApplicationController
   def create
     @bid = Bid.new(**bid_params, bid_time: Time.now)
     set_auction_item(@bid)
-    respond_to do |format|
-      if @bid.save
-        format.turbo_stream
-        format.html { redirect_to @auction_item, notice: 'Bid was successfully created.' }
+    
+    
+    if @bid.save
+      AuctionItemChannel.broadcast_to( 
+        @auction_item,
+        turbo_stream.update("highest_bid_auction_item_#{@auction_item.id}",
+          partial: "bid/highest_bid", locals: { auction_item: @auction_item }
+        )
+      )
+
+      respond_to do |format|
+        # format.turbo_stream
+        format.html { redirect_to root_path, notice: 'Bid was successfully created.' }
       end
     end
   end
