@@ -6,7 +6,7 @@ class BidController < ApplicationController
     
     
     if @bid.save
-      AuctionItemChannel.broadcast_to( 
+      AuctionItemChannel.broadcast_to( # broadcast changes to all sessions
         @auction_item,
         turbo_stream.update("highest_bid_auction_item_#{@auction_item.id}",
           partial: "bid/highest_bid", locals: { auction_item: @auction_item }
