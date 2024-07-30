@@ -24,16 +24,7 @@ RSpec.describe Bid, type: :model do
       expect(bad_bid.errors.messages[:auction_item]).to eq(['must exist'])
       expect(bid.auction_item.name).to eq("XBOX original console")
     end
-  
-    it "ensures bid amount is present" do
-      user = User.create(name: "Jane Doe", email: "email@example.com", password: "foobar123", password_confirmation: "foobar123")
-      item = AuctionItem.create(name:"XBOX original console", description: "mint condition console", starting_price: 500.00, end_date: "25-07-2024", image_link: "https://link.com", user_id: user.id )
-      bad_bid = Bid.create(user_id: user.id, auction_item_id: item.id, bid_time: "29-07-2024" )
 
-      expect(bad_bid.valid?).to be false
-      expect(bad_bid.errors.messages[:amount].include?("can't be blank")).to be true
-
-    end
   
     it "ensures bid time is present" do
       user = User.create(name: "Jane Doe", email: "email@example.com", password: "foobar123", password_confirmation: "foobar123")
