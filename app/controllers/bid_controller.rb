@@ -3,12 +3,13 @@ class BidController < ApplicationController
   def create
     @bid = Bid.new(**bid_params, bid_time: Time.now)
     set_auction_item(@bid)
+    pp "Bid: #{@bid.valid?} : #{@bid.errors.messages}"
     
     
     if @bid.save
       AuctionItemChannel.broadcast_to( # broadcast changes to all sessions
         @auction_item,
-        turbo_stream.update("highest_bid_auction_item_#{@auction_item.id}",
+        turbo_stream.morph("highest_bid_auction_item_#{@auction_item.id}",
           partial: "bid/highest_bid", locals: { auction_item: @auction_item }
         )
       )
@@ -25,11 +26,11 @@ class BidController < ApplicationController
 
   private
   def bid_params
-    params.require(:bid).permit(:auction_item_id, :user_id, :amount)
+    params.require(:bid).permit(:auction_item_id, :user_id, :amount_cents)
   end
 
   def set_auction_item(bid)
-    @auction_item = AuctionItem.find(bid.auction_item_id)
+    @auction_item = AuctionItem.includes(:bids).find(bid.auction_item_id)
   end
   
 end
