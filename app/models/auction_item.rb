@@ -4,6 +4,7 @@ class AuctionItem < ApplicationRecord
 
   monetize :starting_price_cents, with_model_currency: :currency, numericality: { greater_than_or_equal_to: 1 }
 
+
   validates :name, presence: true
   validates :description, presence: true
   validates :image_link, presence: true 
@@ -13,7 +14,7 @@ class AuctionItem < ApplicationRecord
     :with => /\A((http|https):\/\/)?[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_]+)+([\/a-zA-Z0-9\-\._~:?#\[\]@!$&'()*+,;=]*)?\z/,
     :message => 'Invalid link format'
   }
-  # validates :starting_price, numericality: true
+  validates :starting_price_cents, presence: true
   # validates :starting_price, numericality: { greater_than_or_equal_to: 0 }
 
   # Enum definition

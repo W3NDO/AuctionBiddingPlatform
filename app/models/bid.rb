@@ -5,5 +5,6 @@ class Bid < ApplicationRecord
     monetize :amount_cents, with_model_currency: :currency
 
     validates :amount_cents, presence: true
+    validates :amount, presence: true
     validates :bid_time, presence: true
 end

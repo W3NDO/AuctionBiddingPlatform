@@ -68,7 +68,7 @@ RSpec.describe AuctionItem, type: :model do
       item = AuctionItem.create(name:"XBOX original console", description: "mint condition console", end_date: "25-07-2024", image_link: "link", user_id: user.id )
 
       expect(item.valid?).to be false
-      expect(item.errors.messages[:starting_price].include?("can't be blank")).to be true
+      expect(item.errors.messages[:starting_price].include?("must be greater than or equal to 1")).to be true
     end
   end
 end
