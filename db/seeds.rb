@@ -8,7 +8,7 @@ auction_items = [
       "name": "Antique Vase",
       "description": "A rare porcelain vase from the Ming Dynasty, beautifully crafted with intricate designs.",
       "starting_price_cents": 200.00,
-      "end_date": DateTime.new(2024,rand(9..12), rand(0..29), rand(0...23), rand(0...59)),
+      "end_date": DateTime.new(2024,rand(8..12), rand(0..29), rand(0...23), rand(0...59)),
       "image_link": "https://picsum.photos/id/#{rand(1..20)}/400/200"
     },
     {
@@ -43,7 +43,7 @@ auction_items = [
       "name": "Signed First Edition Book",
       "description": "A first edition of 'To Kill a Mockingbird' signed by Harper Lee, in excellent condition.",
       "starting_price_cents": 1200.00,
-      "end_date": DateTime.new(2024,rand(9..12), rand(0..29), rand(0...23), rand(0...59)),
+      "end_date": DateTime.new(2024,rand(8..12), rand(0..29), rand(0...23), rand(0...59)),
       "image_link": "https://picsum.photos/id/#{rand(1..20)}/400/200"
     },
     {
