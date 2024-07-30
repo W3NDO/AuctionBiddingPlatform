@@ -26,9 +26,9 @@
           <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"> <%= auction_item.end_date.strftime("%d-%m-%Y") %> </span>
         </div>
 
-        <div>
+        <div id=<%="highest_bid_auction_item_#{auction_item.id}"%> >
           <%= turbo_frame_tag "highest_bid_auction_item_#{auction_item.id}" do %>
-            <%= render partial: "bid/highest_bid", locals: { auction_item: auction_item } %>
+            <%= render partial: "bid/highest_bid", locals: { highest_bid: auction_item.get_highest_bid } %>
           <% end %>
         </div>
       </div>

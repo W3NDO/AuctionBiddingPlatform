@@ -1,3 +1,3 @@
 <%= turbo_stream.replace "highest_bid_auction_item_#{@auction_item.id}" do %>
-  <%= render partial: "bid/highest_bid", locals: { auction_item: @auction_item } %>
+  <%= render partial: "bid/highest_bid", locals: { highest_bid: @auction_item.get_highest_bid } %>
 <% end %>
