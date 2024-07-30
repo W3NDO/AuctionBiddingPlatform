@@ -11,7 +11,6 @@ document.addEventListener("turbo:load", () => {
       consumer.subscriptions.create({ channel: "AuctionItemChannel", id: auctionItemId }, {
         received(data) {
           const highestBidElement = document.getElementById(`highest_bid_auction_item_${auctionItemId}`)
-          console.log("ID: ", auctionItemId, highestBidElement.innerHTML, data)
           highestBidElement.innerHTML = `${data}`
         }
       })

@@ -3,7 +3,6 @@ class BidController < ApplicationController
   def create
     @bid = Bid.new(**bid_params, bid_time: Time.now)
     set_auction_item(@bid)
-    pp "Bid: #{@bid.valid?} : #{@bid.errors.messages}"
     
     
     if @bid.save
