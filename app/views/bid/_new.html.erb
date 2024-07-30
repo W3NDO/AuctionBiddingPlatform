@@ -3,7 +3,7 @@
   <div>
     <%= f.hidden_field(:auction_item_id, :value => auction_item.id) %>
     <%= f.hidden_field(:user_id, :value => user_id) %>
-    <%= f.number_field(:amount, 
+    <%= f.number_field(:amount_cents, 
       :class => "bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", 
       :required => true, 
       :placeholder => highest_bid ? highest_bid.to_s : auction_item.starting_price.to_s, 
