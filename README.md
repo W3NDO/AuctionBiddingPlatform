@@ -20,3 +20,11 @@ Ensure you create the database, run the migrations and seed the database. You ca
 Ensure all the tests are passing on the repo you pull by running `rspec spec`
 
 I use Foreman in the project and you can start the server by running `foreman start -f Procfile.dev`
+
+## Notes
+Websockets may take some time to connect, as such the first try the updates to the bids on other sessions may not update. However, once the server connects, updates are realtime.
+
+The countdown timer was not implemented due to time. 
+
+### Further improvements 
+**Pagination** to prevent loading all items at a go. This reduces the number of concurrent websocket connections. If we have only 10 auction items this is not as big a problem as compared to if we had 1000s. 
