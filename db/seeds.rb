@@ -77,6 +77,9 @@ auction_items = [
   ]
   
 
+# default users
+User.create(email: "email@example.com", name: "John", password: "foobar123", password_confirmation: "foobar123" )
+User.create(email: "email2@example.com", name: "Jane", password: "foobar123", password_confirmation: "foobar123" )
 
 def create_user
     User.create!(

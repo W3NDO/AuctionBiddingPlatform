@@ -10,6 +10,10 @@ This will ensure that you're authenticated within your database.
 
 You should run `bin/rails db:seed` to initialise the database with seed data. Most of this code has been defined in the `db/seeds.rb` file.
 
+All the seeded users have the same password `foobar123` and the first and second default user have the email `email@example.com` and `email2@example.com`
+
+Some UI templates used were obtained from free tailwindcss templates to speed up the development process.
+
 ## Running the project
 Ensure you create the database, run the migrations and seed the database. You can run `bin/rails db:create db:migrate db:seed`
 
